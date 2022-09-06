@@ -49,6 +49,7 @@
   function parseCourse() {
     let title = document.querySelector(".clp-lead__title").innerText;
     let description = document.querySelector(".clp-lead__headline").innerText;
+    let link = window.location.pathname;
     let img = document
       .querySelector(".intro-asset--img-aspect--1UbeZ")
       .querySelector("img")
@@ -213,7 +214,7 @@
       id: uniqueId(),
       title: title,
       description: description,
-      link: "#",
+      link: link,
       img: img,
       instructors: instructors,
       rating: rating,
