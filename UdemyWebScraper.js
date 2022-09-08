@@ -75,10 +75,16 @@
         .querySelector(".udlite-clp-discount-price")
         .getElementsByTagName("span")[1].innerText
     );
-
+    let totalLength = document.querySelector(
+      ".curriculum--content-length--1XzLS"
+    ).innerText;
+    const lessonParser = (ele) => {};
     const lectureParser = (ele) => {
       let id = uniqueId();
       let title = ele.querySelector(".section--section-title--8blTh").innerText;
+      let totalDuration = ele.querySelector(
+        ".section--section-content--9kwnY"
+      ).innerText;
       let accordionBtn = ele
         .querySelector(".panel--outer-panel-toggler--3I6w6")
         .querySelector("button");
@@ -87,11 +93,22 @@
       let lessonsSpans = ele
         .querySelector(".panel--content--2q9WW")
         .querySelectorAll(".section--row--3PNBT");
+      let lessonsDuration = ele
+        .querySelector(".panel--content--2q9WW")
+        .querySelectorAll(".section--item-content-summary--126oS");
       let lessons = [];
       for (let i = 0; i < lessonsSpans.length; i++) {
-        lessons.push(lessonsSpans[i].innerText);
+        lessons.push({
+          name: lessonsSpans[i].innerText,
+          duration: lessonsDuration[i].innerText,
+        });
       }
-      return { id: id, title: title, lessons: lessons };
+      return {
+        id: id,
+        title: title,
+        totalDuration: totalDuration,
+        lessons: lessons,
+      };
     };
     let lectures = [];
     //expanding the lectures section first
@@ -223,6 +240,7 @@
       price: price,
       oldprice: price,
       lastupdated: lastUpdated,
+      totallength: totalLength,
       lectures: lectures,
       reviewers: reviewers,
       requirements: requirements,
