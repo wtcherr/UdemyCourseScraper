@@ -151,16 +151,9 @@
       let courses = getNumber(
         instEle.querySelectorAll(".udlite-block-list-item-content")[3].innerText
       );
-      let descriptionsParagraphs = instEle
-        .querySelector(".instructor--instructor__description--1dHxF")
-        .querySelectorAll("p");
-      let descriptions = [];
-      for (let i = 0; i < descriptionsParagraphs.length; i++) {
-        descriptions.push({
-          id: uniqueId(),
-          text: descriptionsParagraphs[i].innerHTML,
-        });
-      }
+      let description = instEle.querySelector(
+        ".show-more--with-gradient--2hRXX"
+      ).innerText;
       let dict = {
         id: id,
         name: name,
@@ -170,7 +163,7 @@
         reviews: reviews,
         students: students,
         courses: courses,
-        descriptions: descriptions,
+        description: description,
       };
       return dict;
     };
@@ -231,7 +224,7 @@
     }
 
     const descriptionParser = (desc) => {
-      return { id: uniqueId(), text: desc.innerHTML };
+      return { id: uniqueId(), text: desc.innerText };
     };
     let descriptions = [];
     let descriptionsNodeList = document
