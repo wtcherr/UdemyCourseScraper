@@ -75,10 +75,16 @@
         .querySelector(".udlite-clp-discount-price")
         .getElementsByTagName("span")[1].innerText
     );
+    let learnElements = document
+      .querySelector(".what-you-will-learn--what-will-you-learn--mnJ5T")
+      .querySelectorAll("li");
+    let learnItems = [];
+    for (let i = 0; i < learnElements.length; i++) {
+      learnItems.push({ id: uniqueId(), text: learnElements[i].innerText });
+    }
     let totalLength = document.querySelector(
       ".curriculum--content-length--1XzLS"
     ).innerText;
-    const lessonParser = (ele) => {};
     const lectureParser = (ele) => {
       let id = uniqueId();
       let title = ele.querySelector(".section--section-title--8blTh").innerText;
@@ -99,6 +105,7 @@
       let lessons = [];
       for (let i = 0; i < lessonsSpans.length; i++) {
         lessons.push({
+          id: uniqueId(),
           name: lessonsSpans[i].innerText,
           duration: lessonsDuration[i].innerText,
         });
@@ -106,7 +113,7 @@
       return {
         id: id,
         title: title,
-        totalDuration: totalDuration,
+        totalduration: totalDuration,
         lessons: lessons,
       };
     };
@@ -144,9 +151,16 @@
       let courses = getNumber(
         instEle.querySelectorAll(".udlite-block-list-item-content")[3].innerText
       );
-      let description = instEle.querySelector(
-        ".instructor--instructor__description--1dHxF"
-      ).innerText;
+      let descriptionsParagraphs = instEle
+        .querySelector(".instructor--instructor__description--1dHxF")
+        .querySelectorAll("p");
+      let descriptions = [];
+      for (let i = 0; i < descriptionsParagraphs.length; i++) {
+        descriptions.push({
+          id: uniqueId(),
+          text: descriptionsParagraphs[i].innerHTML,
+        });
+      }
       let dict = {
         id: id,
         name: name,
@@ -156,7 +170,7 @@
         reviews: reviews,
         students: students,
         courses: courses,
-        description: description,
+        descriptions: descriptions,
       };
       return dict;
     };
@@ -217,7 +231,7 @@
     }
 
     const descriptionParser = (desc) => {
-      return desc.innerText;
+      return { id: uniqueId(), text: desc.innerHTML };
     };
     let descriptions = [];
     let descriptionsNodeList = document
@@ -240,6 +254,7 @@
       price: price,
       oldprice: price,
       lastupdated: lastUpdated,
+      learnitems: learnItems,
       totallength: totalLength,
       lectures: lectures,
       reviewers: reviewers,
