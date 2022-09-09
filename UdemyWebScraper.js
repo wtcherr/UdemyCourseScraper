@@ -213,7 +213,7 @@
     }
 
     const requirementsParser = (req) => {
-      return req.innerText;
+      return { id: uniqueId(), text: req.innerText };
     };
     let requirements = [];
     let requirementsNodeList = document
@@ -234,6 +234,17 @@
       descriptions.push(descriptionParser(descriptionsNodeList[i]));
     }
 
+    let feedbacksNodeList = document.querySelectorAll(
+      ".review-summary-widget--rate-percent--2dtfO"
+    );
+    let feedbacks = [];
+    for (let i = 0; i < feedbacksNodeList.length; i++) {
+      feedbacks.push({
+        value: 5 - i,
+        percentage: getNumber(feedbacksNodeList[i].innerText),
+      });
+    }
+
     let courseDict = {
       id: uniqueId(),
       title: title,
@@ -250,6 +261,7 @@
       learnitems: learnItems,
       totallength: totalLength,
       lectures: lectures,
+      feedbacks: feedbacks,
       reviewers: reviewers,
       requirements: requirements,
       descriptions: descriptions,
