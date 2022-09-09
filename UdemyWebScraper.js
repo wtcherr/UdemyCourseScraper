@@ -216,9 +216,17 @@
       return { id: uniqueId(), text: req.innerText };
     };
     let requirements = [];
-    let requirementsNodeList = document
-      .querySelectorAll(".component-margin")[2]
-      .querySelectorAll("li");
+    let requirementsNodeList = [];
+    let component_margins = document.querySelectorAll(".component-margin");
+    for (let i = 0; i < component_margins.length; i++) {
+      if (
+        component_margins[i].querySelector(".requirements--title--2j7S2") !==
+        null
+      ) {
+        requirementsNodeList = component_margins[i].querySelectorAll("li");
+      }
+    }
+
     for (let i = 0; i < requirementsNodeList.length; i++) {
       requirements.push(requirementsParser(requirementsNodeList[i]));
     }
@@ -228,7 +236,7 @@
     };
     let descriptions = [];
     let descriptionsNodeList = document
-      .querySelectorAll(".component-margin")[3]
+      .querySelector(".styles--description--3y4KY")
       .querySelectorAll("p");
     for (let i = 0; i < descriptionsNodeList.length; i++) {
       descriptions.push(descriptionParser(descriptionsNodeList[i]));
