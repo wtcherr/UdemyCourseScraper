@@ -152,7 +152,7 @@
         instEle.querySelectorAll(".udlite-block-list-item-content")[3].innerText
       );
       let description = instEle.querySelector(
-        ".show-more--with-gradient--2hRXX"
+        ".instructor--instructor__description--1dHxF"
       ).innerText;
       let dict = {
         id: id,
